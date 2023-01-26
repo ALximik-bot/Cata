@@ -64,14 +64,19 @@ public class Calc {
         //--- получаем результат
         int res = calcExp(num1, operator, num2);
 
-        //--- если числа римские, то конвертируем в римские и возвращаем результат
+
+        //--- если числа римские, то конвертируем в римские и возвращаем результат 
         if (isRomanExp){
-            String sign = res < 0 ? "-" : "";
-            return sign + parse.arabToRomeConvert(Math.abs(res));
+            if (res <= 0){
+                throw new CalcException("ОШИБКА. В римской системе нет отрицательных чисел и нуля");
+            }
+            return parse.arabToRomeConvert(Math.abs(res));
+
         }
 
         //--- возвращаем ответ - арабское число
         return String.valueOf(res);
+
     }
 
 }
